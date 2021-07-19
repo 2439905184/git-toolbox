@@ -1,17 +1,29 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://git工具箱/alibaba.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://git工具箱/Main.gd" type="Script" id=2]
 [ext_resource path="res://git工具箱/40ttf.tres" type="DynamicFont" id=3]
 [ext_resource path="res://git工具箱/25font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://git工具箱/add_useful_cmd.gd" type="Script" id=5]
+[ext_resource path="res://git工具箱/ItemList.gd" type="Script" id=6]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 25
 font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 15
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=5]
+default_font = ExtResource( 4 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -35,7 +47,7 @@ margin_left = -254.5
 margin_top = -115.5
 margin_right = 254.5
 margin_bottom = 115.5
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "这只是一个git的简易gui工具，使用Godot开发
 海龟git存在问题 容易导致系统问题
 这个是直接调用git命令 所以不会有问题
@@ -46,32 +58,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="add_cmds" type="Button" parent="."]
-margin_left = 244.0
-margin_top = 4.0
-margin_right = 490.0
-margin_bottom = 65.0
-custom_fonts/font = ExtResource( 3 )
-text = "添加常用指令"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="openCmd" type="Button" parent="."]
-margin_left = 490.0
-margin_right = 775.0
-margin_bottom = 61.0
-custom_fonts/font = ExtResource( 3 )
-text = "打开系统命令行"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ItemList" type="ItemList" parent="."]
 margin_right = 244.0
 margin_bottom = 278.0
+hint_tooltip = "测试"
+theme = SubResource( 4 )
 custom_fonts/font = SubResource( 2 )
-items = [ "克隆仓库", null, false, "克隆仓库（指定单独分支）", null, false, "拉取", null, false, "推送", null, false, "删除文件索引（不删除文件）", null, false, "优化git文件夹占用", null, false, "初始化git仓库", null, false ]
+items = [ "克隆仓库", null, false, "克隆仓库（指定单独分支）", null, false, "拉取", null, false, "推送", null, false, "删除文件索引（不删除文件）", null, false, "优化git文件夹占用", null, false, "初始化git仓库", null, false, "修改最后一次提交", null, false ]
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -180,11 +174,139 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="add_cmds" to="." method="_on_add_cmds_pressed"]
-[connection signal="pressed" from="openCmd" to="." method="_on_openCmd_pressed"]
+[node name="tool_bar" type="HBoxContainer" parent="."]
+margin_left = 244.0
+margin_right = 763.0
+margin_bottom = 42.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="add_cmds" type="Button" parent="tool_bar"]
+margin_right = 162.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 4 )
+text = "添加常用指令"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="add_cmds2" type="Button" parent="tool_bar"]
+margin_left = 166.0
+margin_right = 328.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 4 )
+text = "删除选中指令"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="openCmd" type="Button" parent="tool_bar"]
+margin_left = 332.0
+margin_right = 519.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 4 )
+text = "打开系统命令行"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="git help" type="Button" parent="tool_bar"]
+margin_left = 523.0
+margin_right = 685.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 4 )
+text = "当前指令帮助"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="add_useful_cmd" type="PopupPanel" parent="."]
+margin_left = 175.0
+margin_top = 65.0
+margin_right = 848.0
+margin_bottom = 430.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="add_useful_cmd"]
+margin_right = 673.0
+margin_bottom = 365.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Label" parent="add_useful_cmd/vbox"]
+margin_right = 673.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 4 )
+text = "请按照提示输入 按旁边退出"
+
+[node name="var_cmd" type="LineEdit" parent="add_useful_cmd/vbox"]
+margin_top = 40.0
+margin_right = 673.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 4 )
+placeholder_text = "请输入自定义指令名称"
+caret_blink = true
+
+[node name="cmd" type="LineEdit" parent="add_useful_cmd/vbox"]
+margin_top = 90.0
+margin_right = 673.0
+margin_bottom = 136.0
+custom_fonts/font = ExtResource( 4 )
+placeholder_text = "请输入这条指令对应的值 如git commit"
+caret_blink = true
+
+[node name="cmd_help" type="LineEdit" parent="add_useful_cmd/vbox"]
+margin_top = 140.0
+margin_right = 673.0
+margin_bottom = 171.0
+custom_fonts/font = SubResource( 3 )
+placeholder_text = "请输入指令名称（去除git 和参数)如 commit 用于软件的当前指令帮助功能"
+caret_blink = true
+
+[node name="btn_add_cmd" type="Button" parent="add_useful_cmd/vbox"]
+margin_top = 175.0
+margin_right = 673.0
+margin_bottom = 236.0
+custom_fonts/font = ExtResource( 3 )
+text = "确认"
+
+[node name="save_all_cmd" type="Button" parent="."]
+margin_top = 283.0
+margin_right = 162.0
+margin_bottom = 325.0
+custom_fonts/font = ExtResource( 4 )
+text = "保存所有指令"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 126.0
+margin_top = 65.0
+margin_right = 778.0
+margin_bottom = 499.0
+theme = SubResource( 5 )
+window_title = "打开文件"
+mode = 0
+access = 1
+current_dir = "user://C:/Users/11111/Documents/GitHub/Godot_useful_codes"
+current_path = "user://C:/Users/11111/Documents/GitHub/Godot_useful_codes/"
+
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="pressed" from="vbox/hbox/switchWorkDir" to="." method="_on_switchWorkDir_pressed"]
 [connection signal="pressed" from="vbox/execute" to="." method="_on_execute_pressed"]
 [connection signal="pressed" from="bottom/openDir" to="." method="_on_openDir_pressed"]
 [connection signal="pressed" from="bottom/openGitDoc" to="." method="_on_openGitDoc_pressed"]
 [connection signal="pressed" from="bottom/openHelp" to="." method="_on_openHelp_pressed"]
+[connection signal="pressed" from="tool_bar/add_cmds" to="." method="_on_add_cmds_pressed"]
+[connection signal="pressed" from="tool_bar/add_cmds2" to="." method="_on_add_cmds_pressed"]
+[connection signal="pressed" from="tool_bar/openCmd" to="." method="_on_openCmd_pressed"]
+[connection signal="pressed" from="tool_bar/git help" to="." method="_on_git_help_pressed"]
+[connection signal="add_cmd" from="add_useful_cmd" to="ItemList" method="_on_add_useful_cmd_add_cmd"]
+[connection signal="pressed" from="add_useful_cmd/vbox/btn_add_cmd" to="add_useful_cmd" method="_on_btn_add_cmd_pressed"]
+[connection signal="pressed" from="save_all_cmd" to="ItemList" method="_on_save_all_cmd_pressed"]
