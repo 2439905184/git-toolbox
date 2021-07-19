@@ -1,0 +1,190 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://git工具箱/alibaba.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://git工具箱/Main.gd" type="Script" id=2]
+[ext_resource path="res://git工具箱/40ttf.tres" type="DynamicFont" id=3]
+[ext_resource path="res://git工具箱/25font.tres" type="DynamicFont" id=4]
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 1 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+margin_left = 244.0
+margin_top = 195.0
+margin_right = 761.0
+margin_bottom = 434.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PopupPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -254.5
+margin_top = -115.5
+margin_right = 254.5
+margin_bottom = 115.5
+custom_fonts/font = SubResource( 3 )
+text = "这只是一个git的简易gui工具，使用Godot开发
+海龟git存在问题 容易导致系统问题
+这个是直接调用git命令 所以不会有问题
+使用此软件需要先安装git 环境变量
+否则无效！ 点击panel外部退出
+作者qq:2439905184"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="add_cmds" type="Button" parent="."]
+margin_left = 244.0
+margin_top = 4.0
+margin_right = 490.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 3 )
+text = "添加常用指令"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="openCmd" type="Button" parent="."]
+margin_left = 490.0
+margin_right = 775.0
+margin_bottom = 61.0
+custom_fonts/font = ExtResource( 3 )
+text = "打开系统命令行"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="."]
+margin_right = 244.0
+margin_bottom = 278.0
+custom_fonts/font = SubResource( 2 )
+items = [ "克隆仓库", null, false, "克隆仓库（指定单独分支）", null, false, "拉取", null, false, "推送", null, false, "删除文件索引（不删除文件）", null, false, "优化git文件夹占用", null, false, "初始化git仓库", null, false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="."]
+margin_left = 248.0
+margin_top = 65.0
+margin_right = 945.0
+margin_bottom = 161.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hbox" type="HBoxContainer" parent="vbox"]
+margin_right = 766.0
+margin_bottom = 46.0
+
+[node name="work_path" type="LineEdit" parent="vbox/hbox"]
+margin_right = 600.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 600, 0 )
+custom_fonts/font = ExtResource( 4 )
+placeholder_text = "请输入当前工作目录（绝对路径）"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="switchWorkDir" type="Button" parent="vbox/hbox"]
+margin_left = 604.0
+margin_right = 766.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 4 )
+text = "切换工作目录"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cmd" type="LineEdit" parent="vbox"]
+margin_top = 50.0
+margin_right = 766.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 4 )
+placeholder_text = "当前指令"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="para" type="LineEdit" parent="vbox"]
+margin_top = 100.0
+margin_right = 766.0
+margin_bottom = 146.0
+custom_fonts/font = ExtResource( 4 )
+placeholder_text = "附加参数 此行暂时没用 不要输入"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="execute" type="Button" parent="vbox"]
+margin_top = 150.0
+margin_right = 766.0
+margin_bottom = 211.0
+custom_fonts/font = ExtResource( 3 )
+text = "执行"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bottom" type="HBoxContainer" parent="."]
+margin_left = 248.0
+margin_top = 293.0
+margin_right = 721.0
+margin_bottom = 335.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="openDir" type="Button" parent="bottom"]
+margin_right = 212.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 4 )
+text = "打开配置文件目录"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="openGitDoc" type="Button" parent="bottom"]
+margin_left = 216.0
+margin_right = 457.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 4 )
+text = "打开git在线使用手册"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="openHelp" type="Button" parent="bottom"]
+margin_left = 461.0
+margin_right = 523.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 4 )
+text = "帮助"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="add_cmds" to="." method="_on_add_cmds_pressed"]
+[connection signal="pressed" from="openCmd" to="." method="_on_openCmd_pressed"]
+[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="vbox/hbox/switchWorkDir" to="." method="_on_switchWorkDir_pressed"]
+[connection signal="pressed" from="vbox/execute" to="." method="_on_execute_pressed"]
+[connection signal="pressed" from="bottom/openDir" to="." method="_on_openDir_pressed"]
+[connection signal="pressed" from="bottom/openGitDoc" to="." method="_on_openGitDoc_pressed"]
+[connection signal="pressed" from="bottom/openHelp" to="." method="_on_openHelp_pressed"]
