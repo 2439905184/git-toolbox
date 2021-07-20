@@ -8,6 +8,7 @@ var json_data=[]
 func _ready():
 	file=File.new()
 	item_count=get_item_count()
+	#var default_json=""
 	#如果存在保存的配置文件，加载它 动态添加界面
 	if file.file_exists("user://gitTool.json"):
 		file.open("user://gitTool.json",File.READ)
@@ -21,7 +22,9 @@ func _ready():
 		file.close()
 	else:
 		print("文件不存在，载入默认配置")
-		file.open("res://config/gitTool.json",File.READ)
+		#var a=load("res://config/gitTool.json")
+		var err=file.open("res://config/gitTool.json",File.READ)
+		print(err)
 		json_data=[]
 		while file.get_position()<file.get_len():
 			var line=file.get_line()
