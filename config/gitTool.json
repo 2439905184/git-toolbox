@@ -1,0 +1,8 @@
+{"item_cmd":"git clone","item_help":"clone","item_var":"克隆仓库"}
+{"item_cmd":"git clone -b","item_help":"clone","item_var":"克隆仓库（指定单独分支）"}
+{"item_cmd":"git pull","item_help":"pull","item_var":"拉取"}
+{"item_cmd":"git push","item_help":"push","item_var":"推送"}
+{"item_cmd":"git rm --cached","item_help":"rm","item_var":"删除文件索引（不删除文件）"}
+{"item_cmd":"git gc","item_help":"gc","item_var":"优化git文件夹占用"}
+{"item_cmd":"git init","item_help":"init","item_var":"初始化git仓库"}
+{"item_cmd":"git commit --amend","item_help":"commit","item_var":"修改最后一次提交"}

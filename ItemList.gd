@@ -7,6 +7,29 @@ var item_count=0
 var file=File.new()
 func _ready():
 	item_count=get_item_count()
+	file.open("user://gitTool.json",File.READ)
+	#如果存在保存的配置文件，加载它
+	if file.file_exists("user://gitTool.json"):
+		var index=0
+		while true:
+			var line=file.get_line()
+			var json_obj=parse_json(line)
+			if json_obj!=null:
+				print(json_obj.item_var)
+				#set_item_text(index,json_obj.item_var)
+				set_item_metadata(index,json_obj)
+				#index+=1
+			if line=="":
+				file.close()
+				break
+	else:
+		print("文件不存在，载入默认配置")
+		file.open("res://config/gitTool.json",file.READ)
+		for i in get_item_count():
+			var line=file.get_line()
+			var obj=parse_json(line)
+			set_item_metadata(i,obj)
+		file.close()
 #添加新的指令
 func _on_add_useful_cmd_add_cmd(var_cmd,cmd,cmd_help):
 	add_item(var_cmd)

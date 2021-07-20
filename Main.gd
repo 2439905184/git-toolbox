@@ -7,9 +7,7 @@ var itemList:ItemList
 func _ready():
 	cmd=get_node("vbox/cmd")
 	itemList=get_node("ItemList")
-	for i in itemList.get_item_count():
-		setup_meta_data(i)
-#每一行meta data 同步
+#每一行meta data 同步 估计可以删除 暂时不确定
 func setup_meta_data(index):
 	var itemList_data={} #命令名称 命令 帮助用命令
 	itemList_data["item_var"]=itemList.get_item_text(index)
@@ -38,36 +36,33 @@ func setup_meta_data(index):
 		itemList_data["item_cmd"]="git commit --amend"
 		itemList_data["item_help"]="commit"
 	$ItemList.set_item_metadata(index,itemList_data)
-#待重构
+#在选择时，设置数据
+func setup_data_on_select(index):
+	var meta_data=itemList.get_item_metadata(index)
+	cmd.text=meta_data["item_cmd"]
+	git_help_cmd=meta_data["item_help"]
+	pass
+#待重构 选中后 同步数据到右边编辑框内
 func _on_ItemList_item_selected(index):
 	if index==0:
-		cmd.text=itemList.get_item_metadata(index)["item_cmd"]
-		git_help_cmd=itemList.get_item_metadata(index)["item_var"]
+		setup_data_on_select(index)
 	if index==1:
-		cmd.text="git clone -b "
-		git_help_cmd="clone"
+		setup_data_on_select(index)
 	if index==2:
-		cmd.text="git pull"
-		git_help_cmd="pull"
+		setup_data_on_select(index)
 	if index==3:
-		cmd.text="git push"
-		git_help_cmd="push"
+		setup_data_on_select(index)
 	if index==4:
-		cmd.text="git rm --cached"
-		git_help_cmd="rm"
+		setup_data_on_select(index)
 	if index==5:
-		cmd.text="git gc"
-		git_help_cmd="gc"
+		setup_data_on_select(index)
 	if index==6:
-		cmd.text="git init"
-		git_help_cmd="init"
+		setup_data_on_select(index)
 	if index==7:
-		cmd.text="git commit --amend"
-		git_help_cmd="commit"
+		setup_data_on_select(index)
 	if index>7:
-		print("index>",index)
-		cmd.text=itemList.get_item_metadata(index)["item_cmd"]
-		git_help_cmd=itemList.get_item_metadata(index)["item_help"]
+#		print("index>",index)
+		setup_data_on_select(index)
 	#复制命令到系统粘贴板
 	OS.clipboard=cmd.text
 	print(OS.clipboard+">已复制到粘贴板 请到cmd输入指令")
@@ -92,8 +87,9 @@ func _on_switchWorkDir_pressed():
 	print("切换到>"+$vbox/hbox/work_path.text)
 	pass
 func _on_execute_pressed():
-	var i=OS.execute("CMD.exe",[cmd.text],false)
-	print_debug("执行结果>",i)
+	OS.alert("此功能暂未实现")
+	#var i=OS.execute("CMD.exe",[cmd.text],false)
+#	print_debug("执行结果>",i)
 func _on_git_help_pressed():
 	var out_put=Array()
 	OS.execute("CMD.exe", ["/C git help "+git_help_cmd], true,out_put)
