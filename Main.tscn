@@ -65,7 +65,6 @@ margin_bottom = 278.0
 hint_tooltip = "测试"
 theme = SubResource( 2 )
 custom_fonts/font = SubResource( 3 )
-items = [ "克隆仓库", null, false, "克隆仓库（指定单独分支）", null, false, "拉取", null, false, "推送", null, false, "删除文件索引（不删除文件）", null, false, "优化git文件夹占用", null, false, "初始化git仓库", null, false, "修改最后一次提交", null, false ]
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false

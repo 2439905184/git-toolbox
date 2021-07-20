@@ -7,37 +7,6 @@ var itemList:ItemList
 func _ready():
 	cmd=get_node("vbox/cmd")
 	itemList=get_node("ItemList")
-	for i in itemList.get_item_count():
-		setup_meta_data(i)
-#每一行meta data 同步 估计可以删除 暂时不确定
-func setup_meta_data(index):
-	var itemList_data={} #命令名称 命令 帮助用命令
-	itemList_data["item_var"]=itemList.get_item_text(index)
-	if index==0:
-		itemList_data["item_cmd"]="git clone"
-		itemList_data["item_help"]="clone"
-	if index==1:
-		itemList_data["item_cmd"]="git clone -b"
-		itemList_data["item_help"]="clone"
-	if index==2:
-		itemList_data["item_cmd"]="git pull"
-		itemList_data["item_help"]="pull"
-	if index==3:
-		itemList_data["item_cmd"]="git push"
-		itemList_data["item_help"]="push"
-	if index==4:
-		itemList_data["item_cmd"]="git rm --cached"
-		itemList_data["item_help"]="rm"
-	if index==5:
-		itemList_data["item_cmd"]="git gc"
-		itemList_data["item_help"]="gc"
-	if index==6:
-		itemList_data["item_cmd"]="git init"
-		itemList_data["item_help"]="init"
-	if index==7:
-		itemList_data["item_cmd"]="git commit --amend"
-		itemList_data["item_help"]="commit"
-	$ItemList.set_item_metadata(index,itemList_data)
 #在选择时，设置数据
 func setup_data_on_select(index):
 	var meta_data=itemList.get_item_metadata(index)
