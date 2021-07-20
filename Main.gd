@@ -8,9 +8,9 @@ func _ready():
 	cmd=get_node("vbox/cmd")
 	itemList=get_node("ItemList")
 	for i in itemList.get_item_count():
-		sync_meta_data(i)
+		setup_meta_data(i)
 #每一行meta data 同步
-func sync_meta_data(index):
+func setup_meta_data(index):
 	var itemList_data={} #命令名称 命令 帮助用命令
 	itemList_data["item_var"]=itemList.get_item_text(index)
 	if index==0:
@@ -41,43 +41,34 @@ func sync_meta_data(index):
 #待重构
 func _on_ItemList_item_selected(index):
 	if index==0:
-		cmd.text="git clone"
-		git_help_cmd="clone"
-		sync_meta_data(index)
+		cmd.text=itemList.get_item_metadata(index)["item_cmd"]
+		git_help_cmd=itemList.get_item_metadata(index)["item_var"]
 	if index==1:
 		cmd.text="git clone -b "
 		git_help_cmd="clone"
-		sync_meta_data(index)
 	if index==2:
 		cmd.text="git pull"
 		git_help_cmd="pull"
-		sync_meta_data(index)
 	if index==3:
 		cmd.text="git push"
 		git_help_cmd="push"
-		sync_meta_data(index)
 	if index==4:
 		cmd.text="git rm --cached"
 		git_help_cmd="rm"
-		sync_meta_data(index)
 	if index==5:
 		cmd.text="git gc"
 		git_help_cmd="gc"
-		sync_meta_data(index)
 	if index==6:
 		cmd.text="git init"
 		git_help_cmd="init"
-		sync_meta_data(index)
 	if index==7:
 		cmd.text="git commit --amend"
 		git_help_cmd="commit"
-		sync_meta_data(index)
 	if index>7:
 		print("index>",index)
-		cmd.text=$ItemList.get_item_text(index)
-		git_help_cmd=$ItemList.get_item_metadata(index)["item_help"]
-		sync_meta_data(index)
-	#复制命令道系统粘贴板
+		cmd.text=itemList.get_item_metadata(index)["item_cmd"]
+		git_help_cmd=itemList.get_item_metadata(index)["item_help"]
+	#复制命令到系统粘贴板
 	OS.clipboard=cmd.text
 	print(OS.clipboard+">已复制到粘贴板 请到cmd输入指令")
 	print("当前指令>"+cmd.text)
@@ -87,9 +78,10 @@ func _on_openHelp_pressed():
 func _on_openCmd_pressed():
 	OS.shell_open("cmd")
 func _on_openDir_pressed():
-#	OS.shell_open("user://gitTool.json")
-	$FileDialog.popup()
-	$FileDialog.current_dir="user://gitTool.json"
+	var path=ProjectSettings.globalize_path("user://")
+	print(path)
+	var shell_err=OS.shell_open(path)
+	print(shell_err)
 func _on_add_cmds_pressed():
 	$add_useful_cmd.popup()
 func _on_openGitDoc_pressed():
@@ -106,4 +98,6 @@ func _on_git_help_pressed():
 	var out_put=Array()
 	OS.execute("CMD.exe", ["/C git help "+git_help_cmd], true,out_put)
 	print(out_put)
-	#var a=OS.execute("CMD.exe",["git help "+git_help_cmd],false)
+func _on_remove_cmd_pressed():
+	OS.alert("未完成")
+	pass # Replace with function body.

@@ -191,7 +191,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="add_cmds2" type="Button" parent="tool_bar"]
+[node name="remove_cmd" type="Button" parent="tool_bar"]
 margin_left = 166.0
 margin_right = 328.0
 margin_bottom = 42.0
@@ -306,7 +306,7 @@ current_path = "user://E:/github/git-toolbox/"
 [connection signal="pressed" from="bottom/openGitDoc" to="." method="_on_openGitDoc_pressed"]
 [connection signal="pressed" from="bottom/openHelp" to="." method="_on_openHelp_pressed"]
 [connection signal="pressed" from="tool_bar/add_cmds" to="." method="_on_add_cmds_pressed"]
-[connection signal="pressed" from="tool_bar/add_cmds2" to="." method="_on_add_cmds_pressed"]
+[connection signal="pressed" from="tool_bar/remove_cmd" to="." method="_on_remove_cmd_pressed"]
 [connection signal="pressed" from="tool_bar/openCmd" to="." method="_on_openCmd_pressed"]
 [connection signal="pressed" from="tool_bar/git help" to="." method="_on_git_help_pressed"]
 [connection signal="add_cmd" from="add_useful_cmd" to="ItemList" method="_on_add_useful_cmd_add_cmd"]
