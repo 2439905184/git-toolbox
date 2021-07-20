@@ -25,7 +25,8 @@ func _on_ItemList_item_selected(index):
 func _on_openHelp_pressed():
 	$PopupPanel.popup()
 func _on_openCmd_pressed():
-	OS.shell_open("cmd")
+# warning-ignore:unused_variable
+	var error=OS.shell_open("cmd")
 func _on_openDir_pressed():
 	var path=ProjectSettings.globalize_path("user://")
 	print(path)
@@ -34,7 +35,8 @@ func _on_openDir_pressed():
 func _on_add_cmds_pressed():
 	$add_useful_cmd.popup()
 func _on_openGitDoc_pressed():
-	OS.shell_open("https://git-scm.com/docs")
+# warning-ignore:unused_variable
+	var err=OS.shell_open("https://git-scm.com/docs")
 	pass # Replace with function body.
 func _on_switchWorkDir_pressed():
 	dir.change_dir($vbox/hbox/work_path.text)
@@ -46,7 +48,8 @@ func _on_execute_pressed():
 #	print_debug("执行结果>",i)
 func _on_git_help_pressed():
 	var out_put=Array()
-	OS.execute("CMD.exe", ["/C git help "+git_help_cmd], true,out_put)
+# warning-ignore:unused_variable
+	var err=OS.execute("CMD.exe", ["/C git help "+git_help_cmd], true,out_put)
 	print(out_put)
 func _on_remove_cmd_pressed():
 	OS.alert("未完成")

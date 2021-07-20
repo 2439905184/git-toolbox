@@ -1,16 +1,16 @@
 extends ItemList
 #用来存每个数据的数组
 var itemList_data_array=[]
-
 var itemList_texts=[] #所有命令名称
 var item_count=0
-var file=File.new()
+var file
 var json_data=[]
 func _ready():
+	file=File.new()
 	item_count=get_item_count()
-	file.open("user://gitTool.json",File.READ)
 	#如果存在保存的配置文件，加载它 动态添加界面
 	if file.file_exists("user://gitTool.json"):
+		file.open("user://gitTool.json",File.READ)
 		while file.get_position()<file.get_len():
 			var line=file.get_line()
 			var json_obj=parse_json(line)
@@ -21,7 +21,7 @@ func _ready():
 		file.close()
 	else:
 		print("文件不存在，载入默认配置")
-		file.open("res://config/gitTool.json",file.READ)
+		file.open("res://config/gitTool.json",File.READ)
 		json_data=[]
 		while file.get_position()<file.get_len():
 			var line=file.get_line()
@@ -31,7 +31,6 @@ func _ready():
 			print(line)
 		for i in get_item_count():
 			set_item_metadata(i,json_data[i])
-			pass
 		file.close()
 #添加新的指令
 func _on_add_useful_cmd_add_cmd(var_cmd,cmd,cmd_help):
@@ -62,7 +61,8 @@ func _on_reset_config_pressed():
 	var err=dir.remove("user://gitTool.json")
 	if err==OK:
 		OS.alert("重置完成")
-		get_tree().reload_current_scene()
+# warning-ignore:unused_variable
+		var a=get_tree().reload_current_scene()
 	else:
 		OS.alert("重置失败>问题码:"+str(err))
 		OS.alert("请联系作者")
