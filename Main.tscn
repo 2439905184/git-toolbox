@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://alibaba.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://25font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://add_useful_cmd.gd" type="Script" id=5]
 [ext_resource path="res://ItemList.gd" type="Script" id=6]
+[ext_resource path="res://25中文字体.tres" type="Theme" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -287,6 +288,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="reset_config" type="Button" parent="."]
+margin_top = 325.0
+margin_right = 162.0
+margin_bottom = 367.0
+hint_tooltip = "删除保存的配置文件"
+theme = ExtResource( 7 )
+custom_fonts/font = ExtResource( 3 )
+text = "重置配置文件"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 126.0
 margin_top = 65.0
@@ -312,3 +325,4 @@ current_path = "user://E:/github/git-toolbox/"
 [connection signal="add_cmd" from="add_useful_cmd" to="ItemList" method="_on_add_useful_cmd_add_cmd"]
 [connection signal="pressed" from="add_useful_cmd/vbox/btn_add_cmd" to="add_useful_cmd" method="_on_btn_add_cmd_pressed"]
 [connection signal="pressed" from="save_all_cmd" to="ItemList" method="_on_save_all_cmd_pressed"]
+[connection signal="pressed" from="reset_config" to="ItemList" method="_on_reset_config_pressed"]

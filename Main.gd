@@ -7,6 +7,8 @@ var itemList:ItemList
 func _ready():
 	cmd=get_node("vbox/cmd")
 	itemList=get_node("ItemList")
+	for i in itemList.get_item_count():
+		setup_meta_data(i)
 #每一行meta data 同步 估计可以删除 暂时不确定
 func setup_meta_data(index):
 	var itemList_data={} #命令名称 命令 帮助用命令
@@ -44,30 +46,13 @@ func setup_data_on_select(index):
 	pass
 #待重构 选中后 同步数据到右边编辑框内
 func _on_ItemList_item_selected(index):
-	if index==0:
-		setup_data_on_select(index)
-	if index==1:
-		setup_data_on_select(index)
-	if index==2:
-		setup_data_on_select(index)
-	if index==3:
-		setup_data_on_select(index)
-	if index==4:
-		setup_data_on_select(index)
-	if index==5:
-		setup_data_on_select(index)
-	if index==6:
-		setup_data_on_select(index)
-	if index==7:
-		setup_data_on_select(index)
-	if index>7:
-#		print("index>",index)
-		setup_data_on_select(index)
+	setup_data_on_select(index)
 	#复制命令到系统粘贴板
 	OS.clipboard=cmd.text
 	print(OS.clipboard+">已复制到粘贴板 请到cmd输入指令")
 	print("当前指令>"+cmd.text)
 	print("帮助指令>"+git_help_cmd)
+	print("metaData>",itemList.get_item_metadata(index))
 func _on_openHelp_pressed():
 	$PopupPanel.popup()
 func _on_openCmd_pressed():

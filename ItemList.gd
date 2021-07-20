@@ -11,17 +11,16 @@ func _ready():
 	#如果存在保存的配置文件，加载它
 	if file.file_exists("user://gitTool.json"):
 		var index=0
-		while true:
+		#清空并从配置文件加载
+		clear()
+		#更换循环方式
+		while file.get_position()<file.get_len():
 			var line=file.get_line()
+			print(line)
 			var json_obj=parse_json(line)
-			if json_obj!=null:
-				print(json_obj.item_var)
-				#set_item_text(index,json_obj.item_var)
-				set_item_metadata(index,json_obj)
-				#index+=1
-			if line=="":
-				file.close()
-				break
+			add_item(json_obj.item_var)
+			set_item_metadata(index,json_obj)
+			index+=1
 	else:
 		print("文件不存在，载入默认配置")
 		file.open("res://config/gitTool.json",file.READ)
@@ -52,4 +51,13 @@ func _on_save_all_cmd_pressed():
 		var json=to_json({"item_var":meta_data_var_cmd,"item_cmd":meta_data_cmd,"item_help":meta_data_help})
 		file.store_line(json)
 	file.close()
-	pass 
+func _on_reset_config_pressed():
+	var dir=Directory.new()
+	dir.open("user://")
+	var err=dir.remove("user://gitTool.json")
+	if err==OK:
+		OS.alert("重置完成")
+	else:
+		OS.alert("重置失败>问题码:"+str(err))
+		OS.alert("请联系作者")
+	pass
