@@ -3,10 +3,12 @@ extends Node2D
 var git_help_cmd=""
 var cmd:LineEdit
 var dir=Directory.new()
+var work_path:LineEdit
 var itemList:ItemList
 func _ready():
 	cmd=get_node("vbox/cmd")
 	itemList=get_node("ItemList")
+	work_path=get_node("vbox/hbox/work_path")
 #在选择时，设置数据
 func setup_data_on_select(index):
 	var meta_data=itemList.get_item_metadata(index)
@@ -43,14 +45,17 @@ func _on_switchWorkDir_pressed():
 	print("切换到>"+$vbox/hbox/work_path.text)
 	pass
 func _on_execute_pressed():
-	OS.alert("此功能暂未实现")
-	#var i=OS.execute("CMD.exe",[cmd.text],false)
-#	print_debug("执行结果>",i)
+#	OS.alert("此功能暂未实现")
+	var output=[]
+	var i=OS.execute("CMD.exe",["/C cd "+work_path.text+"&"+cmd.text],true,output)
+	print_debug("执行结果>",output)
 func _on_git_help_pressed():
 	var out_put=Array()
 # warning-ignore:unused_variable
 	var err=OS.execute("CMD.exe", ["/C git help "+git_help_cmd], true,out_put)
 	print(out_put)
 func _on_remove_cmd_pressed():
-	OS.alert("未完成")
+	var items=itemList.get_selected_items()
+	itemList.remove_item(items[0])
+	print(items[0])
 	pass # Replace with function body.
